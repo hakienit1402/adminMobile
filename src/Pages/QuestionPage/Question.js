@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DataTable } from "./DataTable";
-import { Modal, Upload, message, Input, Drawer, Descriptions, Row } from "antd";
+import { Modal, Upload, message, Input, Drawer, Descriptions, Row, Button } from "antd";
 import { Pagination } from "../../components/Pagination";
 const { Search } = Input;
 const Question = () => {
@@ -18,24 +18,28 @@ const Question = () => {
         "https://scontent.fvca1-1.fna.fbcdn.net/v/t1.0-9/79451546_3058864351005230_4509966735998189568_o.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_ohc=BVKeMnoM84YAX9axhDn&_nc_ht=scontent.fvca1-1.fna&oh=4bd8cbd3991d8830a0d8f6bf5b3e8fa5&oe=600E8EBA",
     },
     { id: 2 },
-    { id: 3 },
-    { id: 4 },
-    { id: 5 },
+    // { id: 3 },
+    // { id: 4 },
+    // { id: 5 },
   ];
   //   const filterDataSearch = data.filter((filterData) => {
   //     return filterData.tensp.toLowerCase().includes(searchValue.toLowerCase()),
   //     filterData.gia.toString().includes(searchValue)
   //   });
+  const handleAdd = () =>{
+
+  }
   return (
     <div>
       <div
         className="content-header"
         style={{
           display: "flex",
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
           paddingBottom: 10,
         }}
       >
+        <Button onClick={()=>handleAdd()}>NEW QUESTION</Button>
         <Search
           placeholder="Search sản phẩm..."
           onSearch={(value) => console.log(value)}

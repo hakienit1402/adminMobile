@@ -6,7 +6,7 @@ import {
   useLocation,
   BrowserRouter as Router,
 } from "react-router-dom";
-import { Footer } from "./components/Footer";
+// import { Footer } from "./components/Footer";
 import Header from "./components/Header";
 import { About } from "./Pages/Home/About";
 import Admin from "./Admin";
@@ -18,14 +18,13 @@ function App() {
   );
   useEffect(() => {
     const isAuth = JSON.parse(localStorage.getItem("isAuth"));
-
     setIsAuth(isAuth);
   }, []);
   return (
     <div>
       {isAuth === false ?
        <Router>
-       <div className='container'>
+       <div>
           <Header/>
          <Switch>
          <Route path="/" exact={true}>
@@ -40,7 +39,7 @@ function App() {
      </Router>
       :
       <Router>
-      <div className='container'>
+      <div>
          <Header/>
         <Switch>
         <Route path="/" exact={true}>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import {
   UserOutlined,
   LogoutOutlined,
-  LockOutlined,QuestionCircleOutlined,FacebookFilled
+  LockOutlined,QuestionCircleOutlined,FacebookFilled,ProjectOutlined
 } from "@ant-design/icons";
 import { Menu, Modal, Form, Input, Button,Row, Descriptions, Col,Image } from "antd";
 import {  Link, useHistory} from "react-router-dom";
@@ -127,6 +127,9 @@ const Header = (props) => {
               fontWeight: 500,
             }}
           >
+             <Menu.Item icon={<ProjectOutlined />}>
+              <Link to="/admin/user">Dash Board</Link>
+             </Menu.Item>
             <Menu.Item icon={<QuestionCircleOutlined />} onClick={()=> setVisibleAbout(true)}>About us</Menu.Item>
             <Menu.Item icon={<LogoutOutlined />} onClick={logout}>
               Log Out

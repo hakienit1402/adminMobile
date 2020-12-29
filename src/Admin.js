@@ -22,11 +22,8 @@ import { Page404 } from './Pages/404/Page404';
 
 const { Header, Sider, Content } = Layout;
 
-
-
  const Admin = () => {
    const [collapsed , setCollapsed] = useState(false)
-
    const toggle = () => {
    setCollapsed(!collapsed)
   };
