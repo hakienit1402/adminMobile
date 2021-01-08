@@ -1,34 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { DataTable } from "./DataTable";
-import { Modal, Upload, message, Input, Drawer, Descriptions, Row, Button } from "antd";
+import {
+  Button, Empty,
+  Input,
+  Row
+} from "antd";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import * as XLSX from "xlsx";
+import { importQuestion } from "../../actions/questionAction";
 import { Pagination } from "../../components/Pagination";
+import { DataTable } from "./DataTable";
+
 const { Search } = Input;
+
 const Question = () => {
+  const dispatch = useDispatch()
   const [searchValue, setsearchValue] = useState("");
   const [currentPage, setcurrentPage] = useState([1]);
-  const [dataPerPage] = useState([3]);
+  const [dataPerPage] = useState([10]);
   const end = currentPage * dataPerPage;
   const begin = end - dataPerPage;
   const paginate = (pageNumber) => setcurrentPage(pageNumber);
-  const data = [
-    {
-      id: 1,
-      fullname: "Ha Ngoc Kien",
-      image:
-        "https://scontent.fvca1-1.fna.fbcdn.net/v/t1.0-9/79451546_3058864351005230_4509966735998189568_o.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_ohc=BVKeMnoM84YAX9axhDn&_nc_ht=scontent.fvca1-1.fna&oh=4bd8cbd3991d8830a0d8f6bf5b3e8fa5&oe=600E8EBA",
-    },
-    { id: 2 },
-    // { id: 3 },
-    // { id: 4 },
-    // { id: 5 },
-  ];
+//  const [data,setData]=useState([])
+ const data = useSelector(state => state.question.questions)
+ console.log(data)
   //   const filterDataSearch = data.filter((filterData) => {
   //     return filterData.tensp.toLowerCase().includes(searchValue.toLowerCase()),
   //     filterData.gia.toString().includes(searchValue)
   //   });
-  const handleAdd = () =>{
+  const handleAdd = () => {};
 
-  }
+  const readExcel = (file) => {
+    const promise = new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(file);
+
+      fileReader.onload = (e) => {
+        const bufferArray = e.target.result;
+
+        const wb = XLSX.read(bufferArray, { type: "buffer" });
+
+        const wsname = wb.SheetNames[0];
+
+        const ws = wb.Sheets[wsname];
+
+        const data = XLSX.utils.sheet_to_json(ws);
+
+        resolve(data);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+
+    promise.then((d) => {
+      dispatch(importQuestion(d))
+    });
+  };
   return (
     <div>
       <div
@@ -39,22 +67,45 @@ const Question = () => {
           paddingBottom: 10,
         }}
       >
-        <Button onClick={()=>handleAdd()}>NEW QUESTION</Button>
+        <Button onClick={() => handleAdd()}>ADD QUESTION</Button>
         <Search
           placeholder="Search sản phẩm..."
           onSearch={(value) => console.log(value)}
           style={{ width: 300 }}
         />
       </div>
-      <DataTable data={data.slice(begin, end)} />
-      <Pagination
-        dataPerPage={dataPerPage}
-        totalData={data.length}
-        paginate={paginate}
+      {data.length === 0 ? (
+         <Empty
+         image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+         imageStyle={{
+           height: 150,
+         }}
+         description={
+           <span>
+             Import from Excel
+           </span>
+         }
+       >    <Row style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+          <input
+        type="file"
+        onChange={(e) => {
+          const file = e.target.files[0];
+          readExcel(file);
+        }}
       />
+            </Row>   
+       </Empty>
+      ) : (
+        <>
+          <DataTable data={data.slice(begin, end)} />
+          <Pagination
+            dataPerPage={dataPerPage}
+            totalData={data.length}
+            paginate={paginate}
+          />
+        </>
+      )}
     </div>
   );
 };
-
 export default Question;
-

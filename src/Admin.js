@@ -1,24 +1,15 @@
-import React,{useState,useEffect} from 'react'
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-} from "react-router-dom";
-import User from './Pages/UserPage/User'
-import History from './Pages/HistoryPage/History'
-import Question from './Pages/QuestionPage/Question'
-
-import { Layout, Menu,Avatar } from 'antd';
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  ProjectOutlined,
-  ScheduleOutlined,
+  MenuFoldOutlined, MenuUnfoldOutlined,
   ProfileOutlined
 } from "@ant-design/icons";
-import { Page404 } from './Pages/404/Page404';
+import { Avatar, Layout, Menu } from 'antd';
+import React, { useState } from 'react';
+import {
+  Link, Route, Switch
+} from "react-router-dom";
+import DashBoard from "./Pages/DashBoard/DashBoard";
+import Question from './Pages/QuestionPage/Question';
+
 
 const { Header, Sider, Content } = Layout;
 
@@ -43,15 +34,13 @@ const { Header, Sider, Content } = Layout;
         <Avatar size={40}>ADMIN</Avatar>
       </div>
       <Menu mode="inline" defaultSelectedKeys={["1"]}>
-        <Menu.Item key="user" icon={<UserOutlined />}>
-          <Link to="/admin/user">Quản lý tài khoản</Link>
+      <Menu.Item key="dashboard" icon={<ProfileOutlined />}>
+          <Link to="/admin">DashBoard</Link>
         </Menu.Item>
         <Menu.Item key="cauhoi" icon={<ProfileOutlined />}>
           <Link to="/admin/question">Quản lý câu hỏi</Link>
         </Menu.Item>
-        <Menu.Item key="lichsu" icon={<ScheduleOutlined />}>
-          <Link to="/admin/history">Quản lý lịch sử</Link>
-        </Menu.Item>
+      
       </Menu>
     </Sider>
     <Layout className="site-layout">
@@ -73,30 +62,17 @@ const { Header, Sider, Content } = Layout;
           minHeight: 400,
         }}
       > 
-     <Switch>
-      <Route path="/admin/user" >
-        <User/>
-      </Route>
-      <Route path="/admin/history" >
-        <History />
-      </Route>
-
-      <Route path="/admin/question" >
-        <Question/>
-      </Route>
-      <Route path="">
-          <Page404/>
+       <Switch>
+          <Route path="/admin" exact={true}>
+        <DashBoard/>
          </Route>
-    </Switch>
-        
+         <Route path="/admin/question">
+        <Question/>
+         </Route>
+        </Switch>
       </Content>
     </Layout>
   </Layout>
-
-
-    // <Router>
-    
-    // </Router>
   )
 }
 export default Admin

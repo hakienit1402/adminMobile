@@ -94,9 +94,9 @@ const Header = (props) => {
      <Descriptions column={1}>
        <Descriptions.Item label='Company name'>Nong Lam University</Descriptions.Item>
        <Descriptions.Item label='Developer'>Ha Ngoc Kien</Descriptions.Item>
-       <Descriptions.Item label='Version'>st01-2020 YataomeApp</Descriptions.Item>
+       <Descriptions.Item label='Version'>Mobile-App v1.0</Descriptions.Item>
        <Descriptions.Item label='Contact me '>
-         <a href="https://www.facebook.com/hakien1402/"><FacebookFilled />FB: HÀ KIÊN </a> <br/>
+         <a href="https://www.facebook.com/hakien1402/"><FacebookFilled />  FB: HÀ KIÊN </a> <br/>
          Email : hangockien99@gmail.com
        </Descriptions.Item>
      </Descriptions>

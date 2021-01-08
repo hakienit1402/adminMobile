@@ -31,3 +31,8 @@
 
 
 
+  .site-card-border-less-wrapper {
+    padding: 30px;
+    background: #ececec;
+    justify-content: space-between;
+  }

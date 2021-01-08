@@ -17,7 +17,8 @@
     "react-scripts": "3.4.4",
     "redux": "^4.0.5",
     "styled-components": "^5.1.1",
-    "typewriter-effect": "^2.13.1"
+    "typewriter-effect": "^2.13.1",
+    "xlsx": "^0.16.9"
   },
   "scripts": {
     "predeploy": "npm run build",

@@ -20,7 +20,7 @@ export const DataTable = ({ data }) => {
           {data.map((item, index) => (
             <tr key={index}>
               <td>{item.id}</td>
-              <td></td>
+              <td>{item.name}</td>
               <td style={{ textAlign: "center", width: 120 }}></td>
               <td style={{ textAlign: "center" }}></td>
               <td></td>
