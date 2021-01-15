@@ -1,4 +1,3 @@
-import React from 'react'
 const initialState = {
   questions:[]
 }
@@ -11,7 +10,6 @@ const questionReducer = (state=initialState,action) => {
               questions:action.payload
             }
           }
-  
       default:
           return state
   }

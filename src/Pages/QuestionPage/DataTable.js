@@ -1,46 +1,67 @@
-import React from "react";
-import { Button } from "antd";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
+import React from "react";
 export const DataTable = ({ data }) => {
   return (
     <div style={{ minHeight: 400 }}>
       <table className="table  table-bordered table-hover">
         <thead style={{ textAlign: "center" }}>
           <tr>
-            <th>ID</th>
+            <th>Bộ đề</th>
             <th>Ngôn ngữ</th>
-            <th>Mã bộ đề</th>
             <th>Câu hỏi</th>
+            <th>Dạng câu</th>
+            <th>Multi Option</th>
             <th>Đáp án</th>
             <th>Đáp án đúng</th>
             <th>Tác vụ</th>
           </tr>
         </thead>
-        <tbody style={{ textAlign: "center" }}>
+        <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td style={{ textAlign: "center", width: 120 }}></td>
-              <td style={{ textAlign: "center" }}></td>
-              <td></td>
-              <td></td>
-              <td style={{ width: 100, textAlign: "center" }}>
-                <a>
-                  <EyeOutlined
-                    style={{ color: "blue", fontSize: 20, padding: 3 }}
+              <td>{item.topic}</td>
+              <td>{item.language}</td>
+
+              {item.type === "image" ? (
+                <td>
+                  <img
+                    src={item.question}
+                    alt="#"
+                    style={{ 
+                      height: 'auto', 
+                      width: 'auto', 
+                      maxWidth:300,maxHeight:200 }}
                   />
-                </a>
-                <a>
-                  <EditOutlined
-                    style={{ color: "yellow", fontSize: 20, padding: 3 }}
-                  />
-                </a>
-                <a>
-                  <DeleteOutlined
-                    style={{ color: "red", fontSize: 20, padding: 3 }}
-                  />
-                </a>
+                </td>
+              ) : (
+                <td>{item.question}</td>
+              )}
+              <td>{item.type}</td>
+              {item.muiltiOption === true ? <td>True</td> : <td>False</td>}
+              <td>
+                <span style={{ display: "block" }}> A: {item.optionA}</span>
+                <span style={{ display: "block" }}> B: {item.optionB}</span>
+                <span style={{ display: "block" }}> C: {item.optionC}</span>
+                <span style={{ display: "block" }}> D: {item.optionD}</span>
+              </td>
+              <td>
+                <span style={{ display: "block" }}>
+                  Answer One: {item.answerOne}
+                </span>
+                <span style={{ display: "block" }}>
+                  Answer Two: {item.answerTwo}
+                </span>
+              </td>
+              <td style={{ width: 80, textAlign: "center"}}>
+                {/* <EyeOutlined
+                  style={{ color: "blue", fontSize: 20, padding: 3 }}
+                /> */}
+                <EditOutlined
+                  style={{ color: "yellow", fontSize: 20, padding: 3 }}
+                />
+                <DeleteOutlined
+                  style={{ color: "red", fontSize: 20, padding: 3 }}
+                />
               </td>
             </tr>
           ))}

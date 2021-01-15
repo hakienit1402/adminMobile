@@ -1,8 +1,7 @@
+import { Row } from "antd";
 import React from "react";
-import { Image, Divider, Row,Col } from "antd";
-import { Link } from "react-router-dom";
-import Typewriter from "typewriter-effect";
 import styled from "styled-components";
+import Typewriter from "typewriter-effect";
 const MyTitleMessage = styled.h1`
   width: 100%;
   text-align: center;

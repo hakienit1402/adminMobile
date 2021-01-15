@@ -1,34 +1,31 @@
-import {
-  Button, Empty,
-  Input,
-  Row
-} from "antd";
+import { Button, Empty, Input, Row } from "antd";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useContext } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
-import { importQuestion } from "../../actions/questionAction";
 import { Pagination } from "../../components/Pagination";
+import { RootContext } from "../../ContextProviders";
 import { DataTable } from "./DataTable";
 
 const { Search } = Input;
 
 const Question = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [searchValue, setsearchValue] = useState("");
   const [currentPage, setcurrentPage] = useState([1]);
-  const [dataPerPage] = useState([10]);
+  const [dataPerPage] = useState([5]);
   const end = currentPage * dataPerPage;
   const begin = end - dataPerPage;
   const paginate = (pageNumber) => setcurrentPage(pageNumber);
-//  const [data,setData]=useState([])
- const data = useSelector(state => state.question.questions)
- console.log(data)
+  //  const [data,setData]=useState([])
+  //  const data = useSelector(state => state.question.questions)
+  //  console.log(data)
   //   const filterDataSearch = data.filter((filterData) => {
   //     return filterData.tensp.toLowerCase().includes(searchValue.toLowerCase()),
   //     filterData.gia.toString().includes(searchValue)
   //   });
+  const { dataQuestions, importQuestion } = useContext(RootContext);
   const handleAdd = () => {};
-
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -54,7 +51,8 @@ const Question = () => {
     });
 
     promise.then((d) => {
-      dispatch(importQuestion(d))
+      // dispatch(importQuestion(d))
+      importQuestion(d);
     });
   };
   return (
@@ -67,40 +65,56 @@ const Question = () => {
           paddingBottom: 10,
         }}
       >
-        <Button onClick={() => handleAdd()}>ADD QUESTION</Button>
+        {dataQuestions.length !== 0 ? (
+          <Row>
+            <strong style={{ marginRight: 20 }}>ADD QUESTIONS </strong>
+            <input
+              type="file"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                readExcel(file);
+              }}
+            />
+          </Row>
+        ) :   <strong style={{ marginRight: 20 }}>ADD QUESTIONS </strong>}
+
         <Search
           placeholder="Search sản phẩm..."
           onSearch={(value) => console.log(value)}
           style={{ width: 300 }}
         />
       </div>
-      {data.length === 0 ? (
-         <Empty
-         image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-         imageStyle={{
-           height: 150,
-         }}
-         description={
-           <span>
-             Import from Excel
-           </span>
-         }
-       >    <Row style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-          <input
-        type="file"
-        onChange={(e) => {
-          const file = e.target.files[0];
-          readExcel(file);
-        }}
-      />
-            </Row>   
-       </Empty>
+      {dataQuestions.length === 0 ? (
+        <Empty
+          image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
+          imageStyle={{
+            height: 150,
+          }}
+          description={<span>Import from Excel</span>}
+        >
+          {" "}
+          <Row
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <input
+              type="file"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                readExcel(file);
+              }}
+            />
+          </Row>
+        </Empty>
       ) : (
         <>
-          <DataTable data={data.slice(begin, end)} />
+          <DataTable data={dataQuestions.slice(begin, end)} />
           <Pagination
             dataPerPage={dataPerPage}
-            totalData={data.length}
+            totalData={dataQuestions.length}
             paginate={paginate}
           />
         </>

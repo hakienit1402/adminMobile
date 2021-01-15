@@ -1,12 +1,13 @@
 import firebase from 'firebase';
 const firebaseConfig = {
-  apiKey: "AIzaSyAfZoYKddSAuSDsda_3QAp15qGI-hwZvAE",
-  authDomain: "app-android404.firebaseapp.com",
-  projectId: "app-android404",
-  storageBucket: "app-android404.appspot.com",
-  messagingSenderId: "166062360934",
-  appId: "1:166062360934:web:676ae29488905b414d60a7",
-  measurementId: "G-L1NH1N75TD"
+  apiKey: "AIzaSyCRXrpNMB6f5TOR3rNB14BsCNJBf1s0cRM",
+  authDomain: "appmobile2020-notfound.firebaseapp.com",
+  databaseURL: "https://appmobile2020-notfound-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "appmobile2020-notfound",
+  storageBucket: "appmobile2020-notfound.appspot.com",
+  messagingSenderId: "155593824592",
+  appId: "1:155593824592:web:39d1864eb8eeced6bef455",
+  measurementId: "G-3NSYEZRTL8"
 };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
 // import firebase from '../firebase/Firebase'
 import {
-  UserOutlined,
-  LogoutOutlined,
-  LockOutlined,QuestionCircleOutlined,FacebookFilled,ProjectOutlined
+  FacebookFilled, LockOutlined, LogoutOutlined,
+  ProjectOutlined, QuestionCircleOutlined, UserOutlined
 } from "@ant-design/icons";
-import { Menu, Modal, Form, Input, Button,Row, Descriptions, Col,Image } from "antd";
-import {  Link, useHistory} from "react-router-dom";
+import { Button, Col, Descriptions, Form, Image, Input, Menu, Modal, Row } from "antd";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 const { SubMenu } = Menu;
 const Header = (props) => {
   let history = useHistory();
@@ -128,7 +127,7 @@ const Header = (props) => {
             }}
           >
              <Menu.Item icon={<ProjectOutlined />}>
-              <Link to="/admin/user">Dash Board</Link>
+              <Link to="/admin">Dash Board</Link>
              </Menu.Item>
             <Menu.Item icon={<QuestionCircleOutlined />} onClick={()=> setVisibleAbout(true)}>About us</Menu.Item>
             <Menu.Item icon={<LogoutOutlined />} onClick={logout}>

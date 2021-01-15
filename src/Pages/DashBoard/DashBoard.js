@@ -1,5 +1,5 @@
-import React from 'react'
-import { Card,Row } from 'antd';
+import { Card, Row } from 'antd';
+import React from 'react';
 
 const DashBoard = () => {
     return (
