@@ -6,7 +6,7 @@ import * as XLSX from "xlsx";
 import { Pagination } from "../../components/Pagination";
 import { RootContext } from "../../ContextProviders";
 import { DataTable } from "./DataTable";
-
+import { CSVLink } from 'react-csv'
 const { Search } = Input;
 
 const Question = () => {
@@ -20,12 +20,11 @@ const Question = () => {
   //  const [data,setData]=useState([])
   //  const data = useSelector(state => state.question.questions)
   //  console.log(data)
-  //   const filterDataSearch = data.filter((filterData) => {
-  //     return filterData.tensp.toLowerCase().includes(searchValue.toLowerCase()),
-  //     filterData.gia.toString().includes(searchValue)
-  //   });
+  
   const { dataQuestions, importQuestion } = useContext(RootContext);
-  const handleAdd = () => {};
+  const filterDataSearch = dataQuestions.filter((filterData) => {
+    return filterData.language.toLowerCase().includes(searchValue.toLowerCase())
+  });
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -77,12 +76,17 @@ const Question = () => {
             />
           </Row>
         ) :   <strong style={{ marginRight: 20 }}>ADD QUESTIONS </strong>}
-
+        <Row>
         <Search
           placeholder="Search sản phẩm..."
           onSearch={(value) => console.log(value)}
           style={{ width: 300 }}
         />
+        <Button style={{marginLeft:20}} type="primary">
+        <CSVLink data={dataQuestions} filename={'questions-'+ new Date()+'.csv'}>Export</CSVLink>
+        </Button>
+        </Row>
+       
       </div>
       {dataQuestions.length === 0 ? (
         <Empty
@@ -110,14 +114,24 @@ const Question = () => {
           </Row>
         </Empty>
       ) : (
+        searchValue!==''? 
         <>
-          <DataTable data={dataQuestions.slice(begin, end)} />
+          <DataTable data={filterDataSearch.slice(begin, end)} />
           <Pagination
             dataPerPage={dataPerPage}
-            totalData={dataQuestions.length}
+            totalData={filterDataSearch.length}
             paginate={paginate}
           />
-        </>
+        </>:
+        <>
+        <DataTable data={dataQuestions.slice(begin, end)} />
+        <Pagination
+          dataPerPage={dataPerPage}
+          totalData={dataQuestions.length}
+          paginate={paginate}
+        />
+      </>
+
       )}
     </div>
   );

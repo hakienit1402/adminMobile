@@ -13,7 +13,7 @@ export const DataTable = ({ data }) => {
             <th>Multi Option</th>
             <th>Đáp án</th>
             <th>Đáp án đúng</th>
-            <th>Tác vụ</th>
+            {/* <th>Tác vụ</th> */}
           </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@ export const DataTable = ({ data }) => {
                 <td>{item.question}</td>
               )}
               <td>{item.type}</td>
-              {item.muiltiOption === true ? <td>True</td> : <td>False</td>}
+              {item.multiOption === true ? <td>True</td> : <td>False</td>}
               <td>
                 <span style={{ display: "block" }}> A: {item.optionA}</span>
                 <span style={{ display: "block" }}> B: {item.optionB}</span>
@@ -52,17 +52,14 @@ export const DataTable = ({ data }) => {
                   Answer Two: {item.answerTwo}
                 </span>
               </td>
-              <td style={{ width: 80, textAlign: "center"}}>
-                {/* <EyeOutlined
-                  style={{ color: "blue", fontSize: 20, padding: 3 }}
-                /> */}
+              {/* <td style={{ width: 80, textAlign: "center"}}>
                 <EditOutlined
                   style={{ color: "yellow", fontSize: 20, padding: 3 }}
                 />
                 <DeleteOutlined
                   style={{ color: "red", fontSize: 20, padding: 3 }}
                 />
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
